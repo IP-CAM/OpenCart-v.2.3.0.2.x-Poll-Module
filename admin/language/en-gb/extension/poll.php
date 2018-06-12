@@ -13,6 +13,7 @@ $_['button_add_answer']         = 'Добавить ответ';
 $_['button_del_answer']         = 'Удалить ответ';
 $_['button_filter']             = 'Фильтр голосований';
 $_['button_view_all_poll']      = 'Смотреть все голосования';
+$_['button_copy']      			= 'Copy';
 
 $_['text_edit']                 = 'Редактировать'; 
 $_['text_image']				= 'Картинка';
@@ -30,6 +31,7 @@ $_['text_keyword']				= 'SEO Keyword';
 $_['text_no_results']			= 'Пусто!';
 $_['text_browse']				= 'Browse';
 $_['text_clear']				= 'Очистить';
+$_['text_no_votes']				= 'Нет голосов';
 $_['text_image_manager']		= 'Менеджер изображений';
 $_['text_success']				= 'Вы успешно изменили голосование!';
 

@@ -109,8 +109,6 @@ class ControllerExtensionModulepoll extends Controller {
         $data['polls'][] = array('poll_id'=>-1, 'name'=>'Все включеные голосования', 'status'=>1);
 		array_unshift($data['polls'], array('poll_id'=>0, 'name'=>'Один неголосованный', 'status'=>1) );
 		
-//        aEcho($data['polls']);
-
 		if (isset($this->request->post['status'])) {
 			$data['status'] = $this->request->post['status'];
 		} elseif (!empty($module_info)) {
@@ -220,7 +218,6 @@ class ControllerExtensionModulepoll extends Controller {
         $this->model_user_user_group->removePermission($this->user->getId(), 'modify', 'extension/module/poll');
         $this->model_user_user_group->removePermission($this->user->getId(), 'access', 'extension/poll');
         $this->model_user_user_group->removePermission($this->user->getId(), 'modify', 'extension/poll');
-		
 	}	
 	
 	protected function validate() {

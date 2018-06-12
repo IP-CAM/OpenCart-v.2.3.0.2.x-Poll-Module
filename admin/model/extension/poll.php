@@ -231,12 +231,8 @@ class ModelExtensionPoll extends Model {
 
 		$data['status']=0;
 		$data['sort_order']=-1;
-		echo "<pre>";
-		print_r($data);
-		echo "</pre>";
 
 		$this->addPoll($data);
-//		exit();
 	}
    
 	public function getTotalPoll($data) {

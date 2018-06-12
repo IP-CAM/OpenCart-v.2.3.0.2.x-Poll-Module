@@ -4,11 +4,11 @@
 <script type="text/javascript" src="view/javascript/jquery/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
 <link href="view/stylesheet/bootstrap.css" type="text/css" rel="stylesheet" />
-<link href="view/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="screen" />
 
 <style>
-	body 							{ padding: 10px; }
+	body 		{ padding: 10px; }
 	.badge		{ font-weight: 200; }
 </style>
 
@@ -33,13 +33,13 @@
 				  <?php } ?>
 				</div>
 			<?php } else { ?>
-				Нет голосов
+				<?php echo $text_no_votes; ?>
 			<?php } ?>
 		  </div>
 		</div>
 	<?php } ?>
     <div class="panel-footer text-right">
-        <a class="button btn btn-default" href="<?php echo $clearVotes; ?>" onclick="return confirm('are u shure?') ? true : false;" >Clear ALL votes</a>
+        <a class="button btn btn-default" href="<?php echo $clearVotes; ?>" onclick="return confirm('are u shure?') ? true : false;" ><?php echo $text_clear; ?></a>
     </div>
 </div>
  <script type="text/javascript"><!--

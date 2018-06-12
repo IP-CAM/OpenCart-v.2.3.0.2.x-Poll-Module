@@ -1,10 +1,21 @@
 <?php echo $header; ?><?php echo $column_left; ?>
 <div id="content">
+	<style>
+	@font-face {
+	  font-family: 'Glyphicons Halflings';
+	  src: url('view/javascript/bootstrap/fonts/glyphicons-halflings-regular.eot');
+	  src: url('view/javascript/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('view/javascript/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('view/javascript/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('view/javascript/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+	}
+	</style>
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-poll" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+		<?php if($votes && !empty($votes_url)) { ?>
+			<a href="<?php echo $votes_url; ?>" data-toggle="tooltip" title="Votes"  class="getPollVotes btn btn-info"><i class="fa fa-eye"></i></a>
+		<?php } ?>
+        <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a>
+	  </div>
       <h1><?php echo $heading_title; ?></h1>
       <ul class="breadcrumb">
         <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -185,6 +196,24 @@
 	<?php foreach ($languages as $language) { ?>
 	$('#input-description<?php echo $language['language_id']; ?>:not([readonly])').summernote({height: 200});
 	<?php } ?>
+	
+	$(document).ready(function() {
+		$('.getPollVotes').magnificPopup({
+			tLoading: 'Loading frame #%curr%...',
+			type: 'iframe', 
+			closeOnBgClick: true,
+			iframe: {
+				markup: '<style>.mfp-iframe-holder .mfp-content {max-width: 600px; height:450px;} .mfp-iframe-scaler iframe {background:#FFFFFF;}</style>'+
+						'<div class="mfp-iframe-scaler myIframe">'+
+						'<div class="mfp-close"></div>'+
+						'<div id="page-preloader"><span class="spinner"></span></div>'+
+						'<iframe class="mfp-iframe" frameborder="0" scrolling="auto" allowfullscreen></iframe>'+
+						'</div>', 
+			},
+			callbacks: { close: function() { /* location.reload(true); */ } }	});
+	});
+	//--></script> 
+	
 //--></script>
 
 <?php echo $footer; ?>

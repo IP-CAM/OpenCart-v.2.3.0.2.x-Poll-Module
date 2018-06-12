@@ -62,19 +62,19 @@ class ControllerExtensionPoll extends Controller {
         
         if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
-            $data['filter_name'] = $this->request->get['filter_name']; //for template
+            $data['filter_name'] = $this->request->get['filter_name']; 
 		} else {
 			$filter_name = null;
-            $data['filter_name'] = ''; //for template
+            $data['filter_name'] = '';
             
 		}
         
        	if (isset($this->request->get['filter_date_added'])) {
 		    $filter_date_added = $this->request->get['filter_date_added'];
-            $data['filter_date_added'] = $this->request->get['filter_date_added']; //for template
+            $data['filter_date_added'] = $this->request->get['filter_date_added'];
 		} else {
 			$filter_date_added = null;
-            $data['filter_date_added'] = ''; //for template
+            $data['filter_date_added'] = '';
 		}
         
 		$url = '';
@@ -100,7 +100,7 @@ class ControllerExtensionPoll extends Controller {
 				'poll_id' 			=> $poll['poll_id'],
 				'sort_order' 		=> $poll['sort_order'],
 				'name' 				=> $poll['name'],
-				'votes' 				=> $poll['votes'],
+				'votes' 			=> $poll['votes'],
 				'status' 			=> $poll['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'date_added' 		=> date($this->language->get('date_format_short'), strtotime($poll['date_added'])),
 				'edit' 				=> $this->url->link('extension/poll/edit', 'poll_id=' . $poll['poll_id'] . '&token=' . $this->session->data['token'] . $url, 'SSL')
@@ -142,8 +142,6 @@ class ControllerExtensionPoll extends Controller {
 		
         $data['token'] = $this->session->data['token'];
         
-        
-        
 		$url = '';
 		
 		if (isset($this->request->get['page'])) {
@@ -153,7 +151,6 @@ class ControllerExtensionPoll extends Controller {
 		$data['add'] = $this->url->link('extension/poll/insert', '&token=' . $this->session->data['token'] . $url, 'SSL');
 		$data['copy'] = $this->url->link('extension/poll/copy', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$data['delete'] = $this->url->link('extension/poll/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		
 		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -170,7 +167,6 @@ class ControllerExtensionPoll extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-//			aEcho($this->request->post);
 			$this->model_extension_poll->editPoll($this->request->get['poll_id'], $this->request->post);		
 			
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -189,7 +185,6 @@ class ControllerExtensionPoll extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-//			aEcho($this->request->post);
 			$this->model_extension_poll->addPoll($this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -201,6 +196,7 @@ class ControllerExtensionPoll extends Controller {
 	}
 	
 	protected function form() {
+		$this->language->load('extension/module/poll');
 		$this->language->load('extension/poll');
 		
 		$this->load->model('extension/poll');
@@ -209,6 +205,9 @@ class ControllerExtensionPoll extends Controller {
 		$this->document->addScript('view/javascript/summernote/lang/summernote-' . $this->language->get('lang') . '.js');
 		$this->document->addScript('view/javascript/summernote/opencart.js');
 		$this->document->addStyle('view/javascript/summernote/summernote.css');
+
+		$this->document->addStyle('/catalog/view/javascript/jquery/magnific/magnific-popup.css');
+		$this->document->addScript('/catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
 		
 		$data['breadcrumbs'] = array();
 
@@ -275,6 +274,8 @@ class ControllerExtensionPoll extends Controller {
 		if (isset($this->request->get['poll_id'])) {
 			$poll = $this->model_extension_poll->getPoll($this->request->get['poll_id']);
 			$answers = $this->model_extension_poll->getPollAnswer($this->request->get['poll_id']);
+			$data['votes_url'] = $this->url->link('extension/poll/getPollVotes', '&token=' . $this->session->data['token']. '&poll_id=' . $this->request->get['poll_id'], 'SSL');
+			
 		} else {
 			$poll = array();
 			$answers = array();
@@ -343,6 +344,10 @@ class ControllerExtensionPoll extends Controller {
 	
 	public function getPollVotes() {
 		$this->language->load('extension/poll');
+
+		$data['text_clear'] = $this->language->get('text_clear');
+		$data['text_no_votes'] = $this->language->get('text_no_votes');
+
 		$this->load->model('extension/poll');
 
 		$data['customer_edit'] = $this->url->link('customer/customer/edit', '&token=' . $this->session->data['token'] . '&customer_id=', 'SSL');
@@ -364,7 +369,6 @@ class ControllerExtensionPoll extends Controller {
 			}
 			$data['answers'] = $answers;
 			$data['clearVotes'] = $this->url->link('extension/poll/clearvotes', '&token=' . $this->session->data['token'] . '&poll_id=' . $poll_id , 'SSL');
-//			aEcho($answers);
 			
 			echo $this->load->view('extension/poll_votes.tpl', $data);
 			

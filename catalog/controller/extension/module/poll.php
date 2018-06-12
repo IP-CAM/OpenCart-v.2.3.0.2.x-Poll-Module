@@ -8,10 +8,10 @@ class ControllerExtensionModulePoll extends Controller {
 		$data['text_login'] = $this->language->get('text_login');
 		$data['text_date_start'] = $this->language->get('text_date_start');
 		$data['text_date_end'] = $this->language->get('text_date_end');
+		$data['text_not_voted'] = $this->language->get('text_not_voted');
 		$data['text_dialog_error'] = $this->language->get('text_dialog_error');
 		$data['text_dialog_title'] = $this->language->get('text_dialog_title');
 		$data['text_dialog_text'] = sprintf($this->language->get('text_dialog_text'), $setting['name']);
-		
 		
 		$this->load->model('extension/poll');
 
@@ -28,14 +28,14 @@ class ControllerExtensionModulePoll extends Controller {
 			$setting['poll_id']  = $this->model_extension_poll->getOnePoll();
 		}
 		
-//		aEcho($setting);
-			
 		if( $setting['poll_id'] > 0 ) {
 
 			$poll 	 = $this->model_extension_poll->getPoll($setting['poll_id']);
 			$poll['description'] = html_entity_decode($poll['description'], ENT_QUOTES, 'UTF-8');
 
 			$data['MyVote'] = $this->model_extension_poll->getPollVote( $setting['poll_id'] );
+			$data['heading_title'] = $poll['name'];
+			$poll['name'] = '';
 			
 			if( $poll['status']>0 ){
 				$data['poll_enable'] = ($poll['date_start'] <= $datatime && $poll['date_end'] >= $datatime && $this->customer->isLogged() );
@@ -50,7 +50,6 @@ class ControllerExtensionModulePoll extends Controller {
 			$polls 	 = $this->model_extension_poll->getAllPoll(array('start'=>0, 'limit'=>20));
 			
 			$Return = "";
-//			$Return = "<h2>" . $data['heading_title'] . "</h2><br />";
 			
 			foreach($polls as $_poll){
 				$poll 	 = $this->model_extension_poll->getPoll($_poll['poll_id']);

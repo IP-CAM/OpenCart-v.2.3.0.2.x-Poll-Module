@@ -23,6 +23,10 @@
 		top: calc(50% - 20px);
 		left: calc(50% - 20px);
 	}
+	#poll<?php echo $module; ?> .panel-footer small {
+		display: inline-block;
+		line-height: 120%;
+	}
 	
   </style>
 
@@ -58,7 +62,7 @@
             <small><?php echo $text_login; ?></small>
         </div>
       <?php } else { ?>
-        <div class="col-xs-12 col-sm-6 PollVoteText"><?php echo (empty($MyVote['answer_id'])) ? 'Вы еще не голосовали!' :'' ; ?></div>
+        <div class="col-xs-12 col-sm-6 PollVoteText"><small><?php echo (empty($MyVote['answer_id'])) ? $text_not_voted :'' ; ?></small></div>
         <div class="col-xs-12 col-sm-6 text-right">
           <?php if($poll['date_start'] <= $datatime && $poll['date_end'] >= $datatime && $isLogged ) { ?>
             <button type="button" id="btn<?php echo $module; ?>" class="btn btn-default" disabled ><?php echo $button_votes; ?></button>
