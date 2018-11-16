@@ -12,7 +12,7 @@
       <div class="pull-right">
         <button type="submit" form="form-poll" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
 		<?php if($votes && !empty($votes_url)) { ?>
-			<a href="<?php echo $votes_url; ?>" data-toggle="tooltip" title="Votes"  class="getPollVotes btn btn-info"><i class="fa fa-eye"></i></a>
+			<a href="<?php echo $votes_url; ?>" data-toggle="tooltip" title="<?php echo $button_votes; ?>"  class="getPollVotes btn btn-info"><i class="fa fa-eye"></i></a>
 		<?php } ?>
         <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a>
 	  </div>
@@ -117,7 +117,7 @@
 					<div class="form-group" id="answer-row-<?php echo $answer_row; ?>">
 						<input type="hidden" name="answers[<?php echo $answer_row; ?>][answer_id]" value="<?php echo $answer['answer_id']; ?>">
 						<div class="col-sm-6">
-							<label>Ответ:</label>
+							<label><?php echo $text_answer; ?>:</label>
 							<?php foreach ($languages as $language) { ?>
 								<div class="input-group">
 									<span class="input-group-addon"><img src="language/<?php echo $language['code']; ?>/<?php echo $language['code']; ?>.png" title="<?php echo $language['name']; ?>" /></span>
@@ -135,7 +135,7 @@
 							</div>
 						<?php } else { ?>
 							<div class="col-sm-2">
-								<label>Голосов:</label>
+								<label><?php echo $text_votes; ?>:</label>
 								<input type="text" class="form-control"  name="answers[<?php echo $answer_row; ?>][vote]" value="<?php echo $answer['vote']; ?>" readonly="readonly" />
 							</div>
 						<?php } ?>

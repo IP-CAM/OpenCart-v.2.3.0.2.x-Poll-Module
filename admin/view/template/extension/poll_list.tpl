@@ -2,13 +2,14 @@
 <div id="content">
   <style>
 	.getPollVotes { display: block; }
+	.panel-body .btn { margin-left: 10px; }
   </style>
   <div class="page-header">
     <div class="container-fluid">
 	  <div class="pull-right">
-		<a href="<?php echo $add; ?>" data-toggle="tooltip" question="<?php echo $button_add; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-        <button type="button" data-toggle="tooltip" question="<?php echo $button_copy; ?>" class="btn btn-warning" onclick="$('#form-module').attr('action', '<?php echo $copy; ?>'); $('#form-module').submit(); return false;"><i class="fa fa-copy"></i></button>
-        <button type="button" data-toggle="tooltip" question="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-module').submit() : false;"><i class="fa fa-trash-o"></i></button>
+		<a href="<?php echo $add; ?>" data-toggle="tooltip" question="<?php echo $button_add; ?>" title="<?php echo $button_add; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+        <button type="button" data-toggle="tooltip" question="<?php echo $button_copy; ?>" title="<?php echo $button_copy; ?>" class="btn btn-warning" onclick="$('#form-module').attr('action', '<?php echo $copy; ?>'); $('#form-module').submit(); return false;"><i class="fa fa-copy"></i></button>
+        <button type="button" data-toggle="tooltip" question="<?php echo $button_delete; ?>" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-module').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
       <h1><?php echo $heading_title; ?></h1>
       <ul class="breadcrumb">
@@ -32,8 +33,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-question"><i class="fa fa-bars"></i> <?php echo $text_list; ?></h3>
-        <button type="button" id="button-view-all" class="btn btn-primary pull-right" style="margin-top:-8px;"><?php echo $button_view_all_poll; ?></button>
-      </div>
+	  </div>
 	  
       <div class="panel-body">
 	  
@@ -54,6 +54,7 @@
                   <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                   </span></div>
               </div>
+			  <button type="button" id="button-view-all" class="btn btn-primary pull-right"><?php echo $button_view_all_poll; ?></button>
               <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-search"></i> <?php echo $button_filter; ?></button>
               
                
@@ -70,7 +71,8 @@
 				<tr>
 				  <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
 				  <td class="text-left"><?php echo $text_title; ?></td>
-				   <td class="text-left"><?php echo $text_date; ?></td>
+				   <td class="text-center"><?php echo $entry_date_start; ?></td>
+				   <td class="text-center"><?php echo $entry_date_end; ?></td>
 				   <td class="text-center"><?php echo $text_sort_order; ?></td>
 				   <td class="text-center"><?php echo $text_votes; ?></td>
 				   <td class="text-center"><?php echo $text_status; ?></td>
@@ -83,7 +85,8 @@
 				  <tr>
 					<td width="1" style="text-align: center;"><input type="checkbox" name="selected[]" value="<?php echo $poll['poll_id']; ?>" /></td>
 					<td class="text-left"><?php echo $poll['name']; ?></td>
-					<td class="text-left"><?php echo $poll['date_added']; ?></td>
+					<td class="text-center"><?php echo $poll['date_added']; ?></td>
+					<td class="text-center"><?php echo $poll['date_end']; ?></td>
 					<td class="text-center"><?php echo $poll['sort_order']; ?></td>
 					<td class="text-center"><a href="<?php echo $votes .'&poll_id='.$poll['poll_id'];?>" class="getPollVotes"><?php echo $poll['votes']; ?></a></td>
 					<td class="text-center"><?php echo $poll['status']; ?></td>
@@ -92,10 +95,17 @@
 				  <?php } ?>
 				<?php } else { ?>
 				  <tr>
-					<td colspan="7" class="text-center"><?php echo $text_no_results; ?></td>
+					<td colspan="8" class="text-center"><?php echo $text_no_results; ?></td>
 				  </tr>
 				<?php } ?>
 			  </tbody>
+			  <tfoot>
+				<tr>
+					<td colspan="8" class="text-right">
+						<a href="<?php echo $add; ?>" data-toggle="tooltip" question="<?php echo $button_add; ?>" class="btn btn-primary"><i class="fa fa-plus"></i> <?php echo $button_add; ?></a>
+					</td>
+				</tr>
+			  </tfoot>
 			</table>
           </div>
         </form>
