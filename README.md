@@ -1,6 +1,6 @@
 # OpenCart_Poll 
 <pre>
-OpenCart_Poll 1.1
+OpenCart_Poll 1.2
 проверено на ocStore-2.3.0.2.3 
 
 Установка:

@@ -1,40 +1,45 @@
 <?php
 // Heading 
-$_['heading_title']     		= 'Голосования';
-$_['text_list']     		    = 'Все голосования';
-$_['text_answer']     		    = 'Варианты ответов';
-
+$_['heading_title']     		= 'Voting Editor';
+$_['text_list']     		    = 'Voting List';
+$_['text_answer']     		    = 'Voting List';
 
 // Text
-$_['entry_name']                = 'Заголовок';
-$_['entry_date_added']          = 'Дата добавления';
+$_['entry_name']                = 'Headline';
+$_['entry_date_added']          = 'Date added';
+$_['entry_date_start']			= 'Date begin';
+$_['entry_date_end']			= 'Date end';
 
-$_['button_add_answer']         = 'Добавить ответ';
-$_['button_del_answer']         = 'Удалить ответ';
-$_['button_filter']             = 'Фильтр голосований';
-$_['button_view_all_poll']      = 'Смотреть все голосования';
-$_['button_copy']      			= 'Copy';
+$_['button_add_answer']         = 'Add Answer';
+$_['button_del_answer']         = 'Delete Answer';
+$_['button_filter']             = 'Apply filter';
+$_['button_view_all_poll']      = 'View all votes';
+$_['button_add']                = 'Add vote';
+$_['button_copy']               = 'Copy selected entries';
+$_['button_delete']             = 'Delete selected entries';
+$_['button_votes']      	    = 'View votes';
 
-$_['text_edit']                 = 'Редактировать'; 
-$_['text_image']				= 'Картинка';
-$_['text_title']				= 'Заголовок';
-$_['text_name']	            	= 'Название голосования';
-$_['text_description']		    = 'Описание голосования';
-$_['text_date']					= 'Дата добавления';
-$_['text_date_start']			= 'Дата начала голосования';
-$_['text_date_end']				= 'Дата окончания голосования';
-$_['text_action']				= 'Действие';
-$_['text_votes']				= 'Голосов';
-$_['text_status']				= 'Статус';
-$_['text_sort_order']			= 'Сортировка';
-$_['text_keyword']				= 'SEO Keyword';
-$_['text_no_results']			= 'Пусто!';
-$_['text_browse']				= 'Browse';
-$_['text_clear']				= 'Очистить';
-$_['text_no_votes']				= 'Нет голосов';
-$_['text_image_manager']		= 'Менеджер изображений';
-$_['text_success']				= 'Вы успешно изменили голосование!';
+$_['text_edit']                 = 'Edit';
+$_['text_image']                = 'Image';
+$_['text_title']                = 'Title';
+$_['text_name']                 = 'Name of the vote';
+$_['text_description']          = 'Voting description';
+$_['text_date']                 = 'Date Added';
+$_['text_date_start']           = 'Start date of voting';
+$_['text_date_end']             = 'Election end date';
+$_['text_action']               = 'Action';
+$_['text_answer']				= 'Answers';
+$_['text_votes']                = 'Votes';
+$_['text_status']               = 'Status';
+$_['text_sort_order']           = 'Sort';
+$_['text_keyword']              = 'SEO Keyword';
+$_['text_no_results']           = 'Empty!';
+$_['text_browse']               = 'Browse';
+$_['text_clear']                = 'Clear';
+$_['text_no_votes']             = 'No votes';
+$_['text_image_manager']        = 'Image Manager';
+$_['text_success']              = 'You have successfully changed the vote!';
 
 // Error
-$_['error_permission'] 			= 'Warning: У вас нет прав для редактирования голосования!';
+$_['error_permission']          = 'Warning: You are not authorized to edit a vote!';
 ?>

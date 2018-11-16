@@ -103,6 +103,7 @@ class ControllerExtensionPoll extends Controller {
 				'votes' 			=> $poll['votes'],
 				'status' 			=> $poll['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'date_added' 		=> date($this->language->get('date_format_short'), strtotime($poll['date_added'])),
+				'date_end' 		    => date($this->language->get('date_format_short'), strtotime($poll['date_end'])),
 				'edit' 				=> $this->url->link('extension/poll/edit', 'poll_id=' . $poll['poll_id'] . '&token=' . $this->session->data['token'] . $url, 'SSL')
 			);
 		}
@@ -121,9 +122,11 @@ class ControllerExtensionPoll extends Controller {
 		
         $data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_date_added'] = $this->language->get('entry_date_added');
+		$data['entry_date_start'] = $this->language->get('entry_date_start');
+		$data['entry_date_end'] = $this->language->get('entry_date_end');
+		
+		
 		$data['text_sort_order'] = $this->language->get('text_sort_order');
-		$data['button_filter'] = $this->language->get('button_filter');
-        $data['button_view_all_poll'] = $this->language->get('button_view_all_poll');        
 		$data['text_title'] = $this->language->get('text_title');
 		$data['text_question'] = $this->language->get('text_question');
         $data['text_answer'] = $this->language->get('text_answer');
@@ -136,9 +139,12 @@ class ControllerExtensionPoll extends Controller {
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
 		
+		$data['button_filter'] = $this->language->get('button_filter');
+        $data['button_view_all_poll'] = $this->language->get('button_view_all_poll');        
 		$data['button_add'] = $this->language->get('button_add');
 		$data['button_copy'] = $this->language->get('button_copy');
 		$data['button_delete'] = $this->language->get('button_delete');
+		$data['button_votes'] = $this->language->get('button_votes');
 		
         $data['token'] = $this->session->data['token'];
         
@@ -238,7 +244,6 @@ class ControllerExtensionPoll extends Controller {
 		
 		$data['heading_title'] = $this->language->get('heading_title');
 		
-		
 		$data['text_title'] = $this->language->get('text_title');
 		$data['text_name'] = $this->language->get('text_name');
 		$data['text_description'] = $this->language->get('text_description');
@@ -251,6 +256,7 @@ class ControllerExtensionPoll extends Controller {
 		$data['text_browse'] = $this->language->get('text_browse');
 		$data['text_clear'] = $this->language->get('text_clear');
 		$data['text_sort_order'] = $this->language->get('text_sort_order');
+		$data['text_votes'] = $this->language->get('text_votes');
 		$data['text_answer'] = $this->language->get('text_answer');
 	
 		
@@ -258,6 +264,7 @@ class ControllerExtensionPoll extends Controller {
 		$data['button_del_answer'] = $this->language->get('button_del_answer');
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
+		$data['button_votes'] = $this->language->get('button_votes');
 		
 		$data['token'] = $this->session->data['token'];
 		
@@ -359,6 +366,7 @@ class ControllerExtensionPoll extends Controller {
 			$data['poll_id'] = $poll_id;
 			$answers = array();
 			$result = $this->model_extension_poll->getPollAnswer($poll_id);
+			
 			foreach($result as $answer){
 				$answer['votes'] = array();
 				$votes = $this->model_extension_poll->getPollVotes($answer['answer_id']);
