@@ -47,25 +47,58 @@
 			  <div class="form-group required">
 				<label class="col-sm-2 control-label" for="input-poll<?php echo $language['language_id']; ?>"><?php echo $text_name; ?></label>
 				<div class="col-sm-10">
-				  <input type="text" name="poll[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['name'] : ''; ?>" placeholder="<?php echo $text_name; ?>" id="input-poll<?php echo $language['language_id']; ?>" class="form-control" <?php echo ($votes) ? 'readonly="readonly"' : ''; ?> />
+				  <input type="text" name="poll[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['name'] : ''; ?>" placeholder="<?php echo $text_name; ?>" id="input-poll<?php echo $language['language_id']; ?>" class="form-control" <?php //echo ($votes) ? 'readonly="readonly"' : ''; ?> />
+				  <?php if (isset($error_name[$language['language_id']])) { ?>
+				  <div class="text-danger"><?php echo $error_name[$language['language_id']]; ?></div>
+				  <?php } ?>
+				  
+				</div>
+			  </div>
+			  
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="input-small-description<?php echo $language['language_id']; ?>"><?php echo $text_small_description; ?></label>
+				<div class="col-sm-10">
+				  <textarea name="poll[<?php echo $language['language_id']; ?>][small_description]" placeholder="<?php echo $text_small_description; ?>" id="input-small-description<?php echo $language['language_id']; ?>" class="form-control" rows="2" ><?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['small_description'] : ''; ?></textarea>
 				</div>
 			  </div>
 			  
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $text_description; ?></label>
 				<div class="col-sm-10">
-				  <textarea name="poll[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $text_description; ?>" id="input-description<?php echo $language['language_id']; ?>" <?php echo ($votes) ? 'readonly="readonly"' : ''; ?> class="form-control" rows="4" ><?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['description'] : ''; ?></textarea>
+				  <textarea name="poll[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $text_description; ?>" id="input-description<?php echo $language['language_id']; ?>" <?php //echo ($votes) ? 'readonly="readonly"' : ''; ?> class="form-control" rows="4" ><?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['description'] : ''; ?></textarea>
 				</div>
 			  </div>
+			  
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>"><?php echo $text_meta_title; ?></label>
+				<div class="col-sm-10">
+				  <input type="text" name="poll[<?php echo $language['language_id']; ?>][meta_title]" value="<?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['meta_title'] : ''; ?>" placeholder="<?php echo $text_meta_title; ?>" id="input-meta-title<?php echo $language['language_id']; ?>" class="form-control" />
+				</div>
+			  </div>
+			  
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="input-meta-h1<?php echo $language['language_id']; ?>"><?php echo $text_meta_h1; ?></label>
+				<div class="col-sm-10">
+				  <input type="text" name="poll[<?php echo $language['language_id']; ?>][meta_h1]" value="<?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['meta_h1'] : ''; ?>" placeholder="<?php echo $text_meta_h1; ?>" id="input-meta-h1<?php echo $language['language_id']; ?>" class="form-control" />
+				</div>
+			  </div>
+			  
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="input-meta-keyword<?php echo $language['language_id']; ?>"><?php echo $text_meta_keyword; ?></label>
+				<div class="col-sm-10">
+				  <input type="text" name="poll[<?php echo $language['language_id']; ?>][meta_keyword]" value="<?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['meta_keyword'] : ''; ?>" placeholder="<?php echo $text_meta_keyword; ?>" id="input-meta-keyword<?php echo $language['language_id']; ?>" class="form-control" />
+				</div>
+			  </div>
+			  
 			</div>
 			<?php } ?>
 		  </div>
 		  
-		  <div class="form-group required">
+		  <div class="form-group">
 			<label class="col-sm-2 control-label" for="input-date-start"><?php echo $text_date_start; ?></label>
 			<div class="col-sm-3">
 				<div class="input-group datetime">
-					<input type="text" name="date_start" value="<?php echo $date_start; ?>" id="input-date-start" placeholder="<?php echo $text_date_start; ?>" data-date-format="YYYY-MM-DD HH:mm:ss" class="form-control" />
+					<input type="text" name="date_start" value="<?php echo $date_start; ?>" id="input-date-start" placeholder="<?php echo $text_date_start; ?>" data-date-format="YYYY-MM-DD HH:mm:ss" required class="form-control" />
                     <span class="input-group-btn">
 						<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                     </span>				
@@ -73,11 +106,11 @@
 			</div>
 		  </div>
 		  
-		  <div class="form-group required">
+		  <div class="form-group">
 			<label class="col-sm-2 control-label" for="input-date-end"><?php echo $text_date_end; ?></label>
 			<div class="col-sm-3">
 				<div class="input-group datetime">
-					<input type="text" name="date_end" value="<?php echo $date_end; ?>" id="input-date-end" placeholder="<?php echo $text_date_end; ?>" data-date-format="YYYY-MM-DD HH:mm:ss" class="form-control" />
+					<input type="text" name="date_end" value="<?php echo $date_end; ?>" id="input-date-end" placeholder="<?php echo $text_date_end; ?>" data-date-format="YYYY-MM-DD HH:mm:ss" required class="form-control" />
                     <span class="input-group-btn">
 						<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                     </span>				

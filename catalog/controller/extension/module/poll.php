@@ -1,7 +1,7 @@
 <?php
 class ControllerExtensionModulePoll extends Controller {
 	public function index($setting) {
-		static $module = 0;
+		static $module = 1;
 		
 		$this->load->language('extension/module/poll');
 		$data['button_votes'] = $this->language->get('button_votes');
@@ -9,6 +9,7 @@ class ControllerExtensionModulePoll extends Controller {
 		$data['text_date_start'] = $this->language->get('text_date_start');
 		$data['text_date_end'] = $this->language->get('text_date_end');
 		$data['text_not_voted'] = $this->language->get('text_not_voted');
+		$data['text_detailed'] = $this->language->get('text_detailed');
 		$data['text_dialog_error'] = $this->language->get('text_dialog_error');
 		$data['text_dialog_title'] = $this->language->get('text_dialog_title');
 		$data['text_dialog_text'] = sprintf($this->language->get('text_dialog_text'), $setting['name']);
@@ -31,11 +32,11 @@ class ControllerExtensionModulePoll extends Controller {
 		if( $setting['poll_id'] > 0 ) {
 
 			$poll 	 = $this->model_extension_poll->getPoll($setting['poll_id']);
-			$poll['description'] = html_entity_decode($poll['description'], ENT_QUOTES, 'UTF-8');
+			$poll['small_description'] = html_entity_decode($poll['small_description'], ENT_QUOTES, 'UTF-8');
 
 			$data['MyVote'] = $this->model_extension_poll->getPollVote( $setting['poll_id'] );
 			$data['heading_title'] = $poll['name'];
-			$poll['name'] = '';
+			$poll['href'] = $this->url->link('information/poll', 'poll_id=' . $setting['poll_id'] , true);
 			
 			if( $poll['status']>0 ){
 				$data['poll_enable'] = ($poll['date_start'] <= $datatime && $poll['date_end'] >= $datatime && $this->customer->isLogged() );
@@ -53,10 +54,11 @@ class ControllerExtensionModulePoll extends Controller {
 			
 			foreach($polls as $_poll){
 				$poll 	 = $this->model_extension_poll->getPoll($_poll['poll_id']);
-				$poll['description'] = html_entity_decode($poll['description'], ENT_QUOTES, 'UTF-8');
+				$poll['small_description'] = html_entity_decode($poll['small_description'], ENT_QUOTES, 'UTF-8');
 				
 				$data['heading_title'] = $poll['name'];
 				$poll['name'] = '';
+				$poll['href'] = $this->url->link('information/poll', 'poll_id=' . $_poll['poll_id'] , true);
 
 				$data['MyVote'] = $this->model_extension_poll->getPollVote( $_poll['poll_id'] );
 				

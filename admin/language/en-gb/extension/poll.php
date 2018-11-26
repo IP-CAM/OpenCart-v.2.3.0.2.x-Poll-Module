@@ -23,6 +23,11 @@ $_['text_edit']                 = 'Edit';
 $_['text_image']                = 'Image';
 $_['text_title']                = 'Title';
 $_['text_name']                 = 'Name of the vote';
+$_['text_small_description']    = 'Small description';
+$_['text_meta_title']          	= 'HTML Title';
+$_['text_meta_h1']          	= 'HTML H1';
+$_['text_meta_keyword']         = 'Мета Keywords';
+$_['text_keyword']          	= 'SEO URL:';
 $_['text_description']          = 'Voting description';
 $_['text_date']                 = 'Date Added';
 $_['text_date_start']           = 'Start date of voting';
@@ -42,4 +47,6 @@ $_['text_success']              = 'You have successfully changed the vote!';
 
 // Error
 $_['error_permission']          = 'Warning: You are not authorized to edit a vote!';
+$_['error_name']                = 'Warning: Poll Name must be between 6 and 128 characters!';
+$_['error_answers'] 			= 'Warning: There should be at least two answers!';
 ?>

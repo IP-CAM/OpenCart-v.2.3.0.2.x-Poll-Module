@@ -8,6 +8,11 @@
 	#poll<?php echo $module; ?> .panel-body {
 		position: relative;
 	}
+	#poll<?php echo $module; ?> .panel-body .sdesc {
+		padding: 3px 0 3px 0;
+		margin-bottom: 5px;
+		line-height: 125%;
+	}
 	#poll<?php echo $module; ?> .panel-body #public_update {
 		position: absolute;
 		top: 0;
@@ -36,11 +41,17 @@
   <form>
   <div class="panel-body">
 	
-	<div id="public_update"><img src="/catalog/view/image/loading_new.gif" alt="" /></div>
+	<div id="public_update"><img src="/catalog/view/theme/default/image/poll_loading.gif" alt="" /></div>
 	
-	<?php echo ($poll['name']) ? $poll['name'] . '<br />' : '' ; ?>
-	
-	<div><?php echo trim($poll['description']); ?></div>
+	<?php if( !empty($poll['href']) || !empty($poll['small_description']) ) { ?>
+	<div class="sdesc">
+		<?php if( !empty($poll['href']) ) { ?>
+			<a href="<?php echo $poll['href']; ?>" title="<?php echo $text_detailed; ?>"><?php echo !empty($poll['small_description']) ? trim($poll['small_description']) : $text_detailed; ?></a>
+		<?php } elseif( !empty($poll['small_description']) ) { ?>
+			<?php echo trim($poll['small_description']); ?>
+		<?php } ?>
+	</div>
+	<?php } ?>
 	
 	<?php foreach($answers as $answer) { ?>
 		<div class="radio width100">

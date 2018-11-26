@@ -18,6 +18,10 @@ class ModelExtensionPoll extends Model {
 				, language_id = '" . (int)$key . "'
 				, name = '" . $this->db->escape($value['name']) . "'
 				, description = '" . $this->db->escape($value['description']) . "'
+				, small_description = '" . $this->db->escape($value['small_description']) . "'
+				, meta_title = '" . $this->db->escape($value['meta_title']) . "'
+				, meta_h1 = '" . $this->db->escape($value['meta_h1']) . "'
+				, meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'
 			");
         }
 		
@@ -56,6 +60,10 @@ class ModelExtensionPoll extends Model {
 				, language_id = '" . (int)$key . "'
 				, name = '" . $this->db->escape($value['name']) . "'
 				, description = '" . $this->db->escape($value['description']) . "'
+				, small_description = '" . $this->db->escape($value['small_description']) . "'
+				, meta_title = '" . $this->db->escape($value['meta_title']) . "'
+				, meta_h1 = '" . $this->db->escape($value['meta_h1']) . "'
+				, meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'
 			");
 		}
 		
@@ -101,8 +109,12 @@ class ModelExtensionPoll extends Model {
 		
 		foreach ($query->rows as $result) {
 			$poll_description[$result['language_id']] = array(
-				'name'       		=> $result['name'],
-				'description' 		=> $result['description']
+				  'name'       			=> $result['name']
+				, 'description' 		=> $result['description']
+				, 'small_description'	=> $result['small_description']
+				, 'meta_title'			=> $result['meta_title']
+				, 'meta_h1'				=> $result['meta_h1']
+				, 'meta_keyword'		=> $result['meta_keyword']
 			);
 		}
 		

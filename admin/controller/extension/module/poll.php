@@ -176,7 +176,11 @@ class ControllerExtensionModulepoll extends Controller {
 						`poll_id` int(11) NOT NULL,
 						`language_id` int(11) NOT NULL,
 						`name` varchar(128) NOT NULL,
-						`description` varchar(2048) NOT NULL,
+						`small_description` varchar(2048) NOT NULL,
+						`description` TEXT NOT NULL,
+						`meta_title` varchar(2048) NOT NULL,
+						`meta_h1` varchar(2048) NOT NULL,
+						`meta_keyword` varchar(2048) NOT NULL,
 						PRIMARY KEY (`poll_id`,`language_id`)
 					) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 			);

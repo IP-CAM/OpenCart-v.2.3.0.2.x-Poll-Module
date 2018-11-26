@@ -173,6 +173,18 @@ class ControllerExtensionPoll extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			foreach ($this->request->post['poll'] as $language_id => $value) {
+				if (empty($value['meta_title'])) {
+					$this->request->post['poll'][$language_id]['meta_title'] = $value['name'];
+				}
+				if (empty($value['meta_h1'])) {
+					$this->request->post['poll'][$language_id]['meta_h1'] = $value['name'];
+				}
+				if (empty($value['meta_keyword'])) {
+					$this->request->post['poll'][$language_id]['meta_keyword'] = $value['name'];
+				}
+			}
+		
 			$this->model_extension_poll->editPoll($this->request->get['poll_id'], $this->request->post);		
 			
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -191,6 +203,18 @@ class ControllerExtensionPoll extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			foreach ($this->request->post['poll'] as $language_id => $value) {
+				if (empty($value['meta_title'])) {
+					$this->request->post['poll'][$language_id]['meta_title'] = $value['name'];
+				}
+				if (empty($value['meta_h1'])) {
+					$this->request->post['poll'][$language_id]['meta_h1'] = $value['name'];
+				}
+				if (empty($value['meta_keyword'])) {
+					$this->request->post['poll'][$language_id]['meta_keyword'] = $value['name'];
+				}
+			}
+			
 			$this->model_extension_poll->addPoll($this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -246,7 +270,12 @@ class ControllerExtensionPoll extends Controller {
 		
 		$data['text_title'] = $this->language->get('text_title');
 		$data['text_name'] = $this->language->get('text_name');
+		$data['text_small_description'] = $this->language->get('text_small_description');
 		$data['text_description'] = $this->language->get('text_description');
+		$data['text_meta_title'] = $this->language->get('text_meta_title');
+		$data['text_meta_h1'] = $this->language->get('text_meta_h1');
+		$data['text_meta_keyword'] = $this->language->get('text_meta_keyword');
+		$data['text_keyword'] = $this->language->get('text_keyword');
 		$data['text_status'] = $this->language->get('text_status');
 		$data['text_date_start'] = $this->language->get('text_date_start');
 		$data['text_date_end'] = $this->language->get('text_date_end');
@@ -277,6 +306,13 @@ class ControllerExtensionPoll extends Controller {
 		} else {
 			$data['error'] = '';
 		}
+		
+		if (isset($this->error['name'])) {
+			$data['error_name'] = $this->error['name'];
+		} else {
+			$data['error_name'] = array();
+		}
+		
 		
 		if (isset($this->request->get['poll_id'])) {
 			$poll = $this->model_extension_poll->getPoll($this->request->get['poll_id']);
@@ -330,7 +366,7 @@ class ControllerExtensionPoll extends Controller {
 		} elseif (!empty($poll)) {
 			$data['date_end'] = $poll['date_end'];
 		} else {
-			$data['date_end'] = date("Y-m-d H:i:s", time() + 86400 * 14);
+			$data['date_end'] = date("Y-m-d H:i:s", time() + 86400 * 365);
 		}
 		
 		if (isset($this->request->post['sort_order'])) {
@@ -451,6 +487,18 @@ class ControllerExtensionPoll extends Controller {
 	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/poll')) {
 			$this->error['warning'] = $this->language->get('error_permission');
+		}
+		
+		foreach ($this->request->post['poll'] as $language_id => $value) {
+			if ((utf8_strlen($value['name']) < 6) || (utf8_strlen($value['name']) > 128)) {
+				$this->error['name'][$language_id] = $this->language->get('error_name');
+				$this->error['warning'] = $this->language->get('error_name');
+			}
+		}
+		
+		if( empty($this->request->post['answers']) || count($this->request->post['answers']) < 2 ){
+			$this->error['answers'][$language_id] = $this->language->get('error_answers');
+			$this->error['warning'] = $this->language->get('error_answers');
 		}
 		
 		if (!$this->error) {
