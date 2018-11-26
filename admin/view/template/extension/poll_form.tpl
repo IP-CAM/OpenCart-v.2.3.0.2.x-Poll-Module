@@ -65,7 +65,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $text_description; ?></label>
 				<div class="col-sm-10">
-				  <textarea name="poll[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $text_description; ?>" id="input-description<?php echo $language['language_id']; ?>" <?php //echo ($votes) ? 'readonly="readonly"' : ''; ?> class="form-control" rows="4" ><?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['description'] : ''; ?></textarea>
+				  <textarea name="poll[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $text_description; ?>" id="input-description<?php echo $language['language_id']; ?>" <?php //echo ($votes) ? 'readonly="readonly"' : ''; ?> class="form-control summernote" rows="4" ><?php echo isset($poll[$language['language_id']]) ? $poll[$language['language_id']]['description'] : ''; ?></textarea>
 				</div>
 			  </div>
 			  
@@ -226,10 +226,6 @@
 
 	$('#language a:first').tab('show');
 
-	<?php foreach ($languages as $language) { ?>
-	$('#input-description<?php echo $language['language_id']; ?>:not([readonly])').summernote({height: 200});
-	<?php } ?>
-	
 	$(document).ready(function() {
 		$('.getPollVotes').magnificPopup({
 			tLoading: 'Loading frame #%curr%...',
@@ -245,8 +241,7 @@
 			},
 			callbacks: { close: function() { /* location.reload(true); */ } }	});
 	});
-	//--></script> 
+//--></script> 
 	
-//--></script>
 
 <?php echo $footer; ?>
